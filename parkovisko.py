@@ -1,73 +1,23 @@
 def main():
-    stav = ["s0","s1","s2","s3"]
-    vyst = ["zelená","červená"]
-    stavID = 0
-    vystID = 0
+    s0 = {"a0b0":"s0","a1b0":"s0","a1b1":"s0","a0b1":"s1"}
+    s1 = {"a0b0":"s1","a1b0":"s2","a1b1":"s0","a0b1":"s1"}
+    s2 = {"a0b0":"s1","a1b0":"s2","a1b1":"s2","a0b1":"s3"}
+    s3 = {"a0b0":"s3","a1b0":"","a1b1":"s2","a0b1":"s3"}
+    pr_tab = {"s0" : s0,"s1" : s1,"s2": s2,"s3": s3}
+
+    stav = "s0"
+    s = s0
+
     beh = True
     while beh: 
-        if (int(input("zadaj a 1/0 >> ")) == 1):
-            a = True
-        else:
-            a = False
-        if (int(input("zadaj b 1/0 >> ")) == 1):
-            b = True
-        else:
-            b = False
-        match stav[stavID]:
-            case "s0":
-                if(a == 0 and b == 0):
-                    stavID = 0
-                    vystID = 0
-                elif(a == 1 and b == 0):
-                    stavID = 0
-                    vystID = 0
-                elif(a == 1 and b == 1):
-                    stavID = 0
-                    vystID = 0
-                elif(a == 0 and b == 1):
-                    stavID = 1
-                    vystID = 0
-            case "s1":
-                if(a == 0 and b == 0):
-                    stavID = 1
-                    vystID = 0
-                elif(a == 1 and b == 0):
-                    stavID = 2
-                    vystID = 1
-                elif(a == 0 and b == 1):
-                    stavID = 1
-                    vystID = 0
-                elif(a == 1 and b == 1):
-                    stavID = 0
-                    vystID = 0
-            case "s2":
-                if(a == 0 and b == 0):
-                    stavID = 1
-                    vystID = 0
-                elif(a == 1 and b == 0):
-                    stavID = 2
-                    vystID = 1
-                elif(a == 0 and b == 1):
-                    stavID = 3
-                    vystID = 1
-                elif(a == 1 and b == 1):
-                    stavID = 2
-                    vystID = 1
-            case "s3":
-                if(a == 0 and b == 0):
-                    stavID = 3
-                    vystID = 1
-                elif(a == 0 and b == 1):
-                    stavID = 3
-                    vystID = 1
-                elif(a == 1 and b == 1):
-                    stavID = 2
-                    vystID = 1
-        print("Aktuálny stav:",stav[stavID])
-        print("Semafór",vyst[vystID])
+        kluc = input(str("zadaj vstup v tvare aXbX(napr. a0b0) >> "))
+        s = pr_tab.get(stav)
+        stav = s.get(kluc)
+        print("Aktuálny stav:",stav)
+        print("Semafór","zelená" if stav == "s3" else "červená")
         if (input("pokračovať ano/nie>> ") == "ano"):
             beh = True
         else:
             beh = False
-        
+     
 main()
